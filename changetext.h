@@ -5,7 +5,14 @@
    // the exe imports
    #define EXPORT __declspec(dllimport)
 #endif
- 
-// function to be imported/exported
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 EXPORT int init();
 EXPORT wchar_t * ChangeText(wchar_t * src);
+
+#ifdef __cplusplus
+}
+#endif
