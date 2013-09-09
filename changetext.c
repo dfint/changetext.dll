@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "c:\Python33\include\Python.h"
+#include "Python.h"
 #include "changetext.h"
 
 #define ERROR_MESSAGE(message) MessageBox(0,message,"ChangeText",MB_ICONERROR)
@@ -24,7 +24,8 @@ EXPORT int init() {
     return pfuncChangeText!=NULL;
 }
 
-wchar_t buffer[80];
+#define BUFFER_SIZE 0x100
+wchar_t buffer[BUFFER_SIZE];
 
 EXPORT wchar_t * ChangeText(wchar_t * src) {
     PyObject * pValue = NULL;
@@ -34,7 +35,9 @@ EXPORT wchar_t * ChangeText(wchar_t * src) {
     if(pArgs && pfuncChangeText) {
         PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
-        return PyUnicode_AsWideCharString(pValue,NULL);
+        PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
+        return buffer;
+        // return PyUnicode_AsWideCharString(pValue,NULL);
     }
     else return src;
 }
