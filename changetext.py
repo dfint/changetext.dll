@@ -1,7 +1,3 @@
-import logging
-
-if logging:
-    logging.basicConfig(format = '%(levelname)-8s [%(asctime)s] "%(message)s"', level = logging.DEBUG, filename = 'changetext.log')
 
 dictionary = {
     'Slaves to Armok:  God of Blood':'Рабы Армока - бога крови',
@@ -42,9 +38,6 @@ def ChangeText(s):
     if s in dictionary:
         return dictionary[s]
     else:
-        if logging:
-            # logging.debug(s)
-            pass
         return s
 
 if __name__ == '__main__':
