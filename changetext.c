@@ -35,9 +35,15 @@ EXPORT wchar_t * ChangeText(wchar_t * src) {
     if(pArgs && pfuncChangeText) {
         PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
-        PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
-        return buffer;
-        // return PyUnicode_AsWideCharString(pValue,NULL);
+        if(pValue == Py_None) {
+            Py_DECREF(pValue);
+            return 0;
+        }
+        else {
+            PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
+            Py_DECREF(pValue);
+            return buffer;
+        }
     }
     else return src;
 }
