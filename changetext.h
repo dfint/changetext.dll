@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-EXPORT int init();
+EXPORT int Init();
 EXPORT wchar_t * ChangeText(wchar_t * src);
 
 #ifdef __cplusplus
