@@ -10,7 +10,7 @@ PyObject * pModule = NULL,
 
 int initialized = 0;
 
-EXPORT int init() {
+EXPORT int Init() {
     Py_Initialize();
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
@@ -30,7 +30,7 @@ wchar_t buffer[BUFFER_SIZE];
 EXPORT wchar_t * ChangeText(wchar_t * src) {
     PyObject * pValue = NULL;
     
-    if(!initialized) init();
+    if(!initialized) Init();
     
     if(pArgs && pfuncChangeText) {
         PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
