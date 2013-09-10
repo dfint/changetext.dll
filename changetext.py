@@ -32,8 +32,6 @@ dictionary = {
     'Legends':'Легенды'
 }
 
-untranslated = set()
-
 def ChangeText(s):
     if s in dictionary:
         return dictionary[s]
