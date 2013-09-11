@@ -33,7 +33,8 @@ phrases = {
 }
 
 def Init():
-    phrases['Test'] = 'Тест'
+    # phrases['Test'] = 'Тест'
+    pass
 
 def ChangeText(s):
     if s in phrases:
