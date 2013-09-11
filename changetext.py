@@ -1,3 +1,9 @@
+try:
+    import logging
+    logging.basicConfig(format = '%(levelname)-8s [%(asctime)s] "%(message)s"',
+        level = logging.DEBUG, filename = 'changetext.log')
+except:
+    logging = None
 
 phrases = {
     'Slaves to Armok:  God of Blood':'Рабы Армока - бога крови',
@@ -36,11 +42,16 @@ def Init():
     # phrases['Test'] = 'Тест'
     pass
 
+not_translated = set()
+
 def ChangeText(s):
     if s in phrases:
         return phrases[s]
     else:
+        if logging and s not in not_translated:
+            logging.debug(s)
+        not_translated.add(s)
         return None
 
 if __name__ == '__main__':
-    print(ChangeText('Quit'))
+    print(ChangeText('Legends'))
