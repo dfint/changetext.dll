@@ -32,6 +32,9 @@ dictionary = {
     'Legends':'Легенды'
 }
 
+def Init():
+    dictionary['Test'] = 'Тест'
+
 def ChangeText(s):
     if s in dictionary:
         return dictionary[s]
