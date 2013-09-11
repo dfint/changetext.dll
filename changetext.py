@@ -39,7 +39,7 @@ def ChangeText(s):
     if s in phrases:
         return phrases[s]
     else:
-        return s
+        return None
 
 if __name__ == '__main__':
     print(ChangeText('Quit'))
