@@ -1,5 +1,5 @@
 
-dictionary = {
+phrases = {
     'Slaves to Armok:  God of Blood':'Рабы Армока - бога крови',
     'Chapter II: Dwarf Fortress':'Глава II: Крепость дварфов',
     'Жмите ':'Нажмите ',
@@ -33,11 +33,11 @@ dictionary = {
 }
 
 def Init():
-    dictionary['Test'] = 'Тест'
+    phrases['Test'] = 'Тест'
 
 def ChangeText(s):
-    if s in dictionary:
-        return dictionary[s]
+    if s in phrases:
+        return phrases[s]
     else:
         return s
 
