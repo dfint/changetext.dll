@@ -15,8 +15,11 @@ EXPORT int Init() {
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
         pfuncChangeText = PyObject_GetAttrString(pModule, "ChangeText");
-        if(!pfuncChangeText)
+        if(!(pfuncChangeText && PyCallable_Check(pfuncChangeText))) {
+            Py_XDECREF(pfuncChangeText);
+            pfuncChangeText = NULL;
             ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.");
+        }
         pArgs = PyTuple_New(1);
     }
     else ERROR_MESSAGE("Error: Failed to import changetext.py module.");
@@ -32,7 +35,7 @@ EXPORT wchar_t * ChangeText(wchar_t * src) {
     
     if(!initialized) Init();
     
-    if(pArgs && pfuncChangeText) {
+    if(pfuncChangeText && pArgs) {
         PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
         if(pValue == Py_None) {
