@@ -53,6 +53,12 @@ if debug:
 
 not_translated = set()
 
+debug = True
+if debug:
+    log_file = open('changetext.log','a')
+
+not_translated = set()
+
 def ChangeText(s):
     if s in phrases:
         return phrases[s]
@@ -63,6 +69,6 @@ def ChangeText(s):
         return None
 
 if __name__ == '__main__':
-    print(ChangeText('Quit'))
+    print(ChangeText('Legends'))
     # print(LoadFromTrans('trans.txt'))
     input()
