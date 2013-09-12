@@ -36,6 +36,8 @@ def Init():
     # phrases['Test'] = 'Тест'
     pass
 
+Init()
+
 def ChangeText(s):
     if s in phrases:
         return phrases[s]
