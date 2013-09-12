@@ -22,9 +22,6 @@ EXPORT int Init() {
             ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.");
         }
         pArgs = PyTuple_New(1);
-        pfuncInit = PyObject_GetAttrString(pModule, "Init");
-        if(pfuncInit && PyCallable_Check(pfuncInit))
-            Py_XDECREF(PyObject_CallFunction(pfuncInit, NULL));
     }
     else ERROR_MESSAGE("Error: Failed to import changetext.py module.");
     initialized = 1; // At least tried to initialize
