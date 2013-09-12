@@ -48,6 +48,7 @@ def ChangeText(s):
     else:
         if debug and s not in not_translated:
             log_file.write('"%s"\n' % s)
+            log_file.flush()
         not_translated.add(s)
         return None
 
