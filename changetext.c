@@ -43,7 +43,7 @@ EXPORT wchar_t * ChangeText(wchar_t * src) {
             PyErr_PrintEx(1);
         if(pValue && PyUnicode_Check(pValue)) {
             PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
-            Py_XDECREF(pValue);
+            Py_DECREF(pValue);
             return buffer;
         }
         else {
