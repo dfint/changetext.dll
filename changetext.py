@@ -1,3 +1,5 @@
+import sys
+sys.stderr = open('changetext.err', 'w', 1)
 
 phrases = {
     'Slaves to Armok:  God of Blood':'Рабы Армока - бога крови',
