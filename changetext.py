@@ -38,11 +38,22 @@ def Init():
 
 Init()
 
+debug = True
+if debug:
+    log_file = open('changetext.log','a')
+
+not_translated = set()
+
 def ChangeText(s):
     if s in phrases:
         return phrases[s]
     else:
+        if debug and s not in not_translated:
+            log_file.write('"%s"\n' % s)
+            log_file.flush()
+        not_translated.add(s)
         return None
 
 if __name__ == '__main__':
-    print(ChangeText('Quit'))
+    print(ChangeText('Legends'))
+    input()
