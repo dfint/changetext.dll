@@ -31,20 +31,38 @@ phrases = {
         
     'Dwarf Fortress':'Крепость дварфов',
     'Adventurer':'Приключение',
-    'Legends':'Легенды'
+    'Legends':'Легенды',
+    
+    'Пова':'Готовить'
 }
 
-def Init():
-    # phrases['Test'] = 'Тест'
-    pass
+def LoadFromTrans(filename):
+    loaded_dict = {}
+    with open(filename,'r', encoding='cp1251') as trans:
+        for line in trans:
+            if '|' in line:
+                parts = line.split('|')
+                loaded_dict[parts[1]]=parts[2]
+    return loaded_dict
 
-Init()
+# phrases.update(LoadFromTrans('trans.txt'))
+
+debug = True
+if debug:
+    log_file = open('changetext.log', 'a', 1, encoding='cp65001')
+
+not_translated = set()
 
 def ChangeText(s):
     if s in phrases:
         return phrases[s]
     else:
+        if debug and s not in not_translated:
+            log_file.write('"%s"\n' % s)
+        not_translated.add(s)
         return None
 
 if __name__ == '__main__':
     print(ChangeText('Quit'))
+    # print(LoadFromTrans('trans.txt'))
+    input()
