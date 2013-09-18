@@ -13,6 +13,7 @@ int initialized = 0;
 
 EXPORT int Init() {
     Py_Initialize();
+    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'w', 1)");
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
         pfuncChangeText = PyObject_GetAttrString(pModule, "ChangeText");
@@ -23,7 +24,11 @@ EXPORT int Init() {
         }
         pArgs = PyTuple_New(1);
     }
-    else ERROR_MESSAGE("Error: Failed to import changetext.py module.");
+    else {
+        PyErr_PrintEx(1);
+        ERROR_MESSAGE("Error: Failed to import changetext.py module.\nNo module named changetext.py or the existing one contains errors.");
+    }
+    
     initialized = 1; // At least tried to initialize
     return pfuncChangeText!=NULL;
 }
