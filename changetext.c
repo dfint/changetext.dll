@@ -6,20 +6,29 @@
 
 PyObject * pModule = NULL,
          * pfuncChangeText = NULL,
+         * pfuncInit = NULL,
          * pArgs = NULL;
 
 int initialized = 0;
 
-EXPORT int init() {
+EXPORT int Init() {
     Py_Initialize();
+    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'w', 1)");
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
         pfuncChangeText = PyObject_GetAttrString(pModule, "ChangeText");
-        if(!pfuncChangeText)
+        if(!(pfuncChangeText && PyCallable_Check(pfuncChangeText))) {
+            Py_XDECREF(pfuncChangeText);
+            pfuncChangeText = NULL;
             ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.");
+        }
         pArgs = PyTuple_New(1);
     }
-    else ERROR_MESSAGE("Error: Failed to import changetext.py module.");
+    else {
+        PyErr_PrintEx(1);
+        ERROR_MESSAGE("Error: Failed to import changetext.py module.\nNo module named changetext.py or the existing one contains errors.");
+    }
+    
     initialized = 1; // At least tried to initialize
     return pfuncChangeText!=NULL;
 }
@@ -30,14 +39,22 @@ wchar_t buffer[BUFFER_SIZE];
 EXPORT wchar_t * ChangeText(wchar_t * src) {
     PyObject * pValue = NULL;
     
-    if(!initialized) init();
+    if(!initialized) Init();
     
-    if(pArgs && pfuncChangeText) {
+    if(pfuncChangeText && pArgs) {
         PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
-        PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
-        return buffer;
-        // return PyUnicode_AsWideCharString(pValue,NULL);
+        if(!pValue)
+            PyErr_PrintEx(1);
+        if(pValue && PyUnicode_Check(pValue)) {
+            PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
+            Py_DECREF(pValue);
+            return buffer;
+        }
+        else {
+            Py_XDECREF(pValue);
+            return 0;
+        }
     }
     else return src;
 }
