@@ -26,7 +26,7 @@ EXPORT int Init() {
     }
     else {
         PyErr_PrintEx(1);
-        ERROR_MESSAGE("Error: Failed to import changetext.py module.\nNo module named changetext.py or the existing one contains errors.");
+        ERROR_MESSAGE("Error: Failed to import changetext.py module.\nSee changetext.err for details.");
     }
     
     initialized = 1; // At least tried to initialize
