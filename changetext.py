@@ -1,5 +1,4 @@
-
-dictionary = {
+phrases = {
     'Slaves to Armok:  God of Blood':'Рабы Армока - бога крови',
     'Chapter II: Dwarf Fortress':'Глава II: Крепость дварфов',
     'Жмите ':'Нажмите ',
@@ -29,14 +28,38 @@ dictionary = {
         
     'Dwarf Fortress':'Крепость дварфов',
     'Adventurer':'Приключение',
-    'Legends':'Легенды'
+    'Legends':'Легенды',
+    
+    'Пова':'Готовить'
 }
 
+def LoadFromTrans(filename):
+    loaded_dict = {}
+    with open(filename,'r', encoding='cp1251') as trans:
+        for line in trans:
+            if '|' in line:
+                parts = line.split('|')
+                loaded_dict[parts[1]]=parts[2]
+    return loaded_dict
+
+# phrases.update(LoadFromTrans('trans.txt'))
+
+debug = True
+if debug:
+    log_file = open('changetext.log', 'a', 1, encoding='cp65001')
+
+not_translated = set()
+
 def ChangeText(s):
-    if s in dictionary:
-        return dictionary[s]
+    if s in phrases:
+        return phrases[s]
     else:
-        return s
+        if debug and s not in not_translated:
+            log_file.write('"%s"\n' % s)
+        not_translated.add(s)
+        return None
 
 if __name__ == '__main__':
-    print(ChangeText('Quit'))
+    print(ChangeText('Legends'))
+    # print(LoadFromTrans('trans.txt'))
+    input()
