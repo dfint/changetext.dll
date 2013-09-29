@@ -56,5 +56,5 @@ EXPORT wchar_t * ChangeText(wchar_t * src) {
             return 0;
         }
     }
-    else return src;
+    else return 0;
 }
