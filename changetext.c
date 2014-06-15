@@ -13,7 +13,7 @@ int initialized = 0;
 
 EXPORT int Init() {
     Py_Initialize();
-    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'a', 1, encoding='cp65001')");
+    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'a', 1, encoding='cp65001')\nsys.stdout = open('changetext.log', 'a', 1, encoding='cp65001')");
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
         pfuncChangeText = PyObject_GetAttrString(pModule, "ChangeText");
