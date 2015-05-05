@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 EXPORT int Init();
-EXPORT wchar_t * ChangeText(wchar_t * src);
+EXPORT uint16_t * ChangeText(uint16_t * src);
 
 #ifdef __cplusplus
 }

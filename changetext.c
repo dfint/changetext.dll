@@ -34,9 +34,9 @@ EXPORT int Init() {
 }
 
 #define BUFFER_SIZE 0x100
-wchar_t buffer[BUFFER_SIZE];
+uint16_t buffer[BUFFER_SIZE];
 
-EXPORT wchar_t * ChangeText(wchar_t * src) {
+EXPORT uint16_t * ChangeText(uint16_t * src) {
     PyObject * pValue = NULL;
     
     if(!initialized) Init();
