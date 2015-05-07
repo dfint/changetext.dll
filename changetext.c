@@ -42,20 +42,27 @@ EXPORT int Init() {
 #define BUFFER_SIZE 0x100
 uint16_t buffer[BUFFER_SIZE];
 
+size_t my_strlen(uint16_t * s) {
+    size_t i;
+    for(i=0; s[i]; i++);
+    return i*sizeof(uint16_t);
+}
+
 EXPORT uint16_t * ChangeText(uint16_t * src) {
     PyObject * pValue = NULL;
-    
+    PyObject * bytesUtf16;
     if(!initialized) Init();
     
     if(pfuncChangeText && pArgs) {
-        PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
+        printf("Length: %d\n", my_strlen(src));
+        bytesUtf16 = PyBytes_FromStringAndSize(src, my_strlen(src));
+        PyTuple_SetItem(pArgs, 0, bytesUtf16);
+        Py_XDECREF(pValue);
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
         if(!pValue)
             PyErr_PrintEx(1);
-        if(pValue && PyUnicode_Check(pValue)) {
-            PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
-            Py_DECREF(pValue);
-            return buffer;
+        if(pValue) {
+            return PyBytes_AS_STRING(pValue);
         }
         else {
             Py_XDECREF(pValue);
