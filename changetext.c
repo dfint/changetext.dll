@@ -9,7 +9,6 @@
 
 PyObject * pModule = NULL,
          * pfuncChangeText = NULL,
-         * pfuncInit = NULL,
          * pArgs = NULL;
 
 int initialized = 0;
@@ -27,7 +26,7 @@ EXPORT int Init() {
             pfuncChangeText = NULL;
             ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.\n");
         }
-        pArgs = PyTuple_New(1);
+        else pArgs = PyTuple_New(1);
     }
     else {
         PyErr_PrintEx(1);
@@ -45,18 +44,21 @@ uint16_t buffer[BUFFER_SIZE];
 
 EXPORT uint16_t * ChangeText(uint16_t * src) {
     PyObject * pValue = NULL;
+    PyObject * bytesUtf16;
     
     if(!initialized) Init();
     
     if(pfuncChangeText && pArgs) {
-        PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
+        // PyTuple_SetItem(pArgs, 0, PyUnicode_FromWideChar(src,-1));
+        PyTuple_SetItem(pArgs, 0, PyUnicode_FromKindAndData(PyUnicode_2BYTE_KIND, src, -1));
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
         if(!pValue)
             PyErr_PrintEx(1);
         if(pValue && PyUnicode_Check(pValue)) {
-            PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
+            // PyUnicode_AsWideChar(pValue,buffer,BUFFER_SIZE);
+            bytesUtf16 = PyUnicode_AsUTF16String(pValue);
             Py_DECREF(pValue);
-            return buffer;
+            return PyBytes_AS_STRING(bytesUtf16);
         }
         else {
             Py_XDECREF(pValue);
