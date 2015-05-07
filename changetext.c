@@ -1,8 +1,11 @@
-#include <windows.h>
 #include "Python.h"
 #include "changetext.h"
 
+#if defined(WIN32) || defined(WINDOWS)
 #define ERROR_MESSAGE(message) MessageBox(0,message,"ChangeText",MB_ICONERROR)
+#else
+#define ERROR_MESSAGE(message) fputs(message, stderr)
+#endif
 
 PyObject * pModule = NULL,
          * pfuncChangeText = NULL,
