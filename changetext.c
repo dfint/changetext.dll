@@ -54,15 +54,14 @@ EXPORT uint16_t * ChangeText(uint16_t * src) {
     if(!initialized) Init();
     
     if(pfuncChangeText && pArgs) {
-        printf("Length: %d\n", my_strlen(src));
-        bytesUtf16 = PyBytes_FromStringAndSize(src, my_strlen(src));
+        bytesUtf16 = PyBytes_FromStringAndSize((char*)src, my_strlen(src));
         PyTuple_SetItem(pArgs, 0, bytesUtf16);
         Py_XDECREF(pValue);
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
         if(!pValue)
             PyErr_PrintEx(1);
         if(pValue) {
-            return PyBytes_AS_STRING(pValue);
+            return (uint16_t*)PyBytes_AS_STRING(pValue);
         }
         else {
             Py_XDECREF(pValue);
