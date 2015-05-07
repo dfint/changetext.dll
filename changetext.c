@@ -9,7 +9,6 @@
 
 PyObject * pModule = NULL,
          * pfuncChangeText = NULL,
-         * pfuncInit = NULL,
          * pArgs = NULL;
 
 int initialized = 0;
@@ -27,7 +26,7 @@ EXPORT int Init() {
             pfuncChangeText = NULL;
             ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.\n");
         }
-        pArgs = PyTuple_New(1);
+        else pArgs = PyTuple_New(1);
     }
     else {
         PyErr_PrintEx(1);
