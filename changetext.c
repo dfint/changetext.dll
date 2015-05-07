@@ -16,20 +16,24 @@ int initialized = 0;
 
 EXPORT int Init() {
     Py_Initialize();
-    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'a', 1, encoding='cp65001')\nsys.stdout = open('changetext.log', 'a', 1, encoding='cp65001')");
+    #if defined(WIN32) || defined(WINDOWS)
+    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'a', 1, encoding='utf-8')\nsys.stdout = open('changetext.log', 'a', 1, encoding='utf-8')");
+    #endif
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
         pfuncChangeText = PyObject_GetAttrString(pModule, "ChangeText");
         if(!(pfuncChangeText && PyCallable_Check(pfuncChangeText))) {
             Py_XDECREF(pfuncChangeText);
             pfuncChangeText = NULL;
-            ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.");
+            ERROR_MESSAGE("Error: Probably changetext.py module doesn't contain ChangeText function.\n");
         }
         pArgs = PyTuple_New(1);
     }
     else {
         PyErr_PrintEx(1);
-        ERROR_MESSAGE("Error: Failed to import changetext.py module.\nSee changetext.err for details.");
+        #if defined(WIN32) || defined(WINDOWS)
+        ERROR_MESSAGE("Error: Failed to import changetext.py module.\nSee changetext.err for details.\n");
+        #endif
     }
     
     initialized = 1; // At least tried to initialize
