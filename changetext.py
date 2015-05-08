@@ -9,9 +9,11 @@ def ChangeText(s):
     if decoded == 'hello':
         returned = 'world'
     
-    b = returned.encode("utf-16")[2:]+b'\0\0'
-    
-    return b
+    if returned is None:
+        return None
+    else:
+        b = returned.encode("utf-16")[2:]+b'\0\0'
+        return b
 
 
 if __name__ == '__main__':
