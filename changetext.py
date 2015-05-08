@@ -5,6 +5,7 @@ def ChangeText(s):
     decoded = s.decode("utf-16")
     print('Decoded:', decoded)
     
+    returned = None
     if decoded == 'hello':
         returned = 'world'
     
