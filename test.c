@@ -2,19 +2,29 @@
 #include <stdint.h>
 #include "changetext.h"
 
-int main()
+void test(uint16_t * str)
 {
-    uint16_t str[] = {'h', 'e', 'l', 'l', 'o', 0};
-    uint16_t * out_str;
-    printf("Init returned: %d\n", Init());
-    out_str = ChangeText(str);
+    uint16_t * out_str = ChangeText(str);
     puts("ChangeText() returned:\n");
-    
     if(!out_str)
-        puts("NULL\n");
-    else
+        puts("NULL");
+    else {
         printf("%p\n", out_str);
         for(int i = 0; out_str[i]; i++)
             printf("%04x %c\n", out_str[i], out_str[i]);
+    }
+}
+
+
+int main()
+{
+    uint16_t str1[] = {'h', 'e', 'l', 'l', 'o', 0};
+    uint16_t str2[] = {'H', 'E', 'L', 'L', 'O', 0};
+    
+    printf("Init returned: %d\n", Init());
+    
+    test(str1);
+    test(str2);
+    
     return 0;
 }
