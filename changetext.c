@@ -59,10 +59,7 @@ EXPORT uint16_t * ChangeText(uint16_t * src) {
         Py_XDECREF(pValue);
         pValue = PyObject_CallObject(pfuncChangeText, pArgs);
         if(pValue == Py_None)
-        {
-            Py_DECREF(pValue);
             return src;
-        }
         
         if(pValue)
             return (uint16_t*)PyBytes_AS_STRING(pValue);
