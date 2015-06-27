@@ -16,7 +16,7 @@ int initialized = 0;
 EXPORT int Init() {
     Py_Initialize();
     #if defined(WIN32) || defined(WINDOWS)
-    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'a', 1, encoding='utf-8')\nsys.stdout = open('changetext.log', 'a', 1, encoding='utf-8')");
+    PyRun_SimpleString("import sys\nsys.stderr = open('changetext.err', 'a', 1, encoding='utf-8')");
     #endif
     pModule = PyImport_ImportModule("changetext");
     if(pModule) {
