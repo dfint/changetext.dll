@@ -30,9 +30,7 @@ EXPORT int Init() {
     }
     else {
         PyErr_PrintEx(1);
-        #if defined(WIN32) || defined(WINDOWS)
         ERROR_MESSAGE("Error: Failed to import changetext.py module.\nSee changetext.err for details.\n");
-        #endif
     }
     
     initialized = 1; // At least tried to initialize
