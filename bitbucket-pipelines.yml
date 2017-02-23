@@ -4,6 +4,7 @@ pipelines:
   default:
     - step:
         script:
+          - sudo apt-get install python3-dev
           - chmod +x compile_changetext.sh
           - ./compile_changetext.sh
           - ./test
