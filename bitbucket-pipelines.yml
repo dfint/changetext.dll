@@ -4,6 +4,6 @@ pipelines:
   default:
     - step:
         script:
-          - chmod compile_changetext.sh +x
+          - chmod +x compile_changetext.sh
           - ./compile_changetext.sh
           - ./test
