@@ -8,4 +8,5 @@ pipelines:
           - apt-get install python3-dev -y
           - chmod +x compile_changetext.sh
           - ./compile_changetext.sh
+          - export PYTHONPATH=.
           - ./test
