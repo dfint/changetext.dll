@@ -5,7 +5,7 @@ pipelines:
     - step:
         script:
           - apt-get update
-          - apt-get install python3-dev
+          - apt-get install python3-dev -y
           - chmod +x compile_changetext.sh
           - ./compile_changetext.sh
           - ./test
