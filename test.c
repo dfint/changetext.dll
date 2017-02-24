@@ -20,8 +20,10 @@ int main()
 {
     uint16_t str1[] = {'h', 'e', 'l', 'l', 'o', 0};
     uint16_t str2[] = {'H', 'E', 'L', 'L', 'O', 0};
+    int is_initialized = Init();
     
-    printf("Init returned: %d\n", Init());
+    printf("Init returned: %d\n", is_initialized);
+    if(!is_initialized) return 1;
     
     test(str1);
     test(str2);
