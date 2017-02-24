@@ -5,7 +5,7 @@
 void test(uint16_t * str)
 {
     uint16_t * out_str = ChangeText(str);
-    puts("ChangeText() returned:\n");
+    puts("ChangeText() returned:");
     if(!out_str)
         puts("NULL");
     else {
