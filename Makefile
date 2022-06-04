@@ -1,4 +1,4 @@
-.PHONY: build build_so
+.PHONY: build build_so pytest clean
 
 # CC=x86_64-w64-mingw32-gcc
 CC=gcc
@@ -26,3 +26,6 @@ test: $(NAME).so test.c
 
 pytest: build_so
 	export LD_LIBRARY_PATH="$(shell pwd)" && pytest test_so.py
+
+clean:
+	rm test *.o *.so *.exe *.dll | true
