@@ -1,7 +1,4 @@
-import os
-
 from ctypes import *
-from pathlib import Path
 
 import pytest
 
