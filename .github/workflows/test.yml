@@ -19,10 +19,10 @@ jobs:
       with:
         python-version: 3.8
 
-      - name: make test
-        run: |
-          # make test
-          # export PYTHONPATH=$PYTHONPATH:.
-          # ./test
-          pip3 install pytest
-          make pytest
+    - name: make test
+      run: |
+        # make test
+        # export PYTHONPATH=$PYTHONPATH:.
+        # ./test
+        pip3 install pytest
+        make pytest
