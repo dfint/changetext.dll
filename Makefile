@@ -1,4 +1,4 @@
-.PHONY: build build_linux
+.PHONY: build build_so
 
 # CC=x86_64-w64-mingw32-gcc
 CC=gcc
@@ -18,8 +18,11 @@ test.exe: $(NAME).dll test.c
 $(NAME).so: $(NAME).c
 	$(CC) -c -O2 $(NAME).c -shared -fPIC -lm -lpython3.8 -o lib$(NAME).so -I/usr/include/python3.8
 
-build_linux: $(NAME).so
+build_so: $(NAME).so
 
 test: $(NAME).so test.c
 	gcc -c test.c --std=c99
 	gcc test.o -L. -l$(NAME) -lpython3.8 -o test
+
+pytest: build_so
+	export LD_LIBRARY_PATH="$(shell pwd)" && pytest test_so.py
