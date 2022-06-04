@@ -2,8 +2,8 @@
 
 # CC=x86_64-w64-mingw32-gcc
 CC=gcc
-IDIR=C:/Python34/include
-LIBDIR=C:/Python34/libs
+IDIR=blob/Python34/include
+LIBDIR=blob/Python34/libs
 NAME=changetext
 
 $(NAME).dll: $(NAME).c
