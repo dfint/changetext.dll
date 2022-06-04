@@ -16,7 +16,7 @@ test.exe: $(NAME).dll test.c
 	$(CC) -O2 -std=c99 test.c lib$(NAME).a -o test.exe
 
 $(NAME).so: $(NAME).c
-	$(CC) -c -O2 $(NAME).c -shared -fPIC -lm -lpython3.8 -o lib$(NAME).so -I/usr/include/python3.8
+	$(CC) -O2 $(NAME).c -shared -fPIC -lpython3.8 -o lib$(NAME).so -I/usr/include/python3.8
 
 build_so: $(NAME).so
 
