@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: make test
         run: |
-          make test
-          export PYTHONPATH=$PYTHONPATH:.
-          ./test
+          # make test
+          # export PYTHONPATH=$PYTHONPATH:.
+          # ./test
+          make pytest
