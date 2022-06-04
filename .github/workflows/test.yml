@@ -16,4 +16,5 @@ jobs:
           # make test
           # export PYTHONPATH=$PYTHONPATH:.
           # ./test
+          pip3 install pytest
           make pytest
