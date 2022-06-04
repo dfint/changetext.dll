@@ -23,6 +23,7 @@ jobs:
       run: |
         make test
         export PYTHONPATH=$PYTHONPATH:.
+        export LD_LIBRARY_PATH=.
         ./test
         # pip3 install pytest
         # make pytest
