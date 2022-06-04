@@ -21,8 +21,8 @@ jobs:
 
     - name: make test
       run: |
-        # make test
-        # export PYTHONPATH=$PYTHONPATH:.
-        # ./test
-        pip3 install pytest
-        make pytest
+        make test
+        export PYTHONPATH=$PYTHONPATH:.
+        ./test
+        # pip3 install pytest
+        # make pytest
