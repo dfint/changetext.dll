@@ -12,16 +12,16 @@ $(NAME).dll: $(NAME).c
 
 build: $(NAME).dll
 
-test.exe: $(NAME).dll test.c
-	$(CC) -O2 -std=c99 test.c lib$(NAME).a -o test.exe
+test.exe: $(NAME).dll test.cpp
+	$(CC) -O2 test.cpp lib$(NAME).a -o test.exe --std=c++11
 
 $(NAME).so: $(NAME).c
 	$(CC) -O2 $(NAME).c -shared -fPIC -lpython3.8 -o lib$(NAME).so -I/usr/include/python3.8
 
 build_so: $(NAME).so
 
-test: $(NAME).so test.c
-	gcc -c test.c --std=c99
+test: $(NAME).so test.cpp
+	gcc -O2 -c test.cpp --std=c++11
 	gcc test.o -L. -l$(NAME) -lpython3.8 -o test
 
 pytest: build_so
