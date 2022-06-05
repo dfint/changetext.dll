@@ -5,7 +5,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def changetext_function():
-    lib = cdll.LoadLibrary("libchangetext.so")
+    lib = cdll.LoadLibrary("./libchangetext.so")
     lib.ChangeText.restype = c_wchar_p
     lib.Init()
     return lib.ChangeText

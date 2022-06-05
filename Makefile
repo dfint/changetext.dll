@@ -21,11 +21,11 @@ $(NAME).so: $(NAME).c
 build_so: $(NAME).so
 
 test: $(NAME).so test.cpp
-	gcc -O2 -c test.cpp --std=c++11
-	gcc test.o -L. -l$(NAME) -lpython3.8 -o test
+	$(CC)  -O2 -c test.cpp --std=c++11
+	$(CC)  test.o -L. -l$(NAME) -lpython3.8 -o test
 
 pytest: build_so
-	export LD_LIBRARY_PATH="$(shell pwd)" && pytest test_so.py
+	pytest test_so.py
 
 clean:
 	rm test *.o *.so *.exe *.dll | true
