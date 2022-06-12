@@ -12,4 +12,5 @@ jobs:
 
     - name: make build
       run: |
-        make build
+        make build_dll_32
+        make build_dll_64
