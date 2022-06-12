@@ -14,7 +14,7 @@ NAME=changetext
 
 $(NAME)32.dll: $(NAME).c
 	$(CC) -c -DBUILD_DLL -O2 $(NAME).c -I$(IDIR32) -m32
-	$(CC) -shared -o $(NAME).dll -Wl,--out-implib,lib$(NAME).a $(NAME).o -L$(LIBDIR32) -lpython37
+	$(CC) -shared -o $(NAME).dll -Wl,--out-implib,lib$(NAME).a $(NAME).o -L$(LIBDIR32) -lpython37 -m32
 
 build_dll_32: $(NAME)32.dll
 
