@@ -16,8 +16,8 @@ IDIR_LINUX=/usr/include/python3.8
 NAME=changetext
 
 $(NAME)32.dll: $(NAME).c
-	$(CC_MINGW32) -c -DBUILD_DLL -O2 $(NAME).c -I$(IDIR32) -m32
-	$(CC_MINGW32) -shared -o $(NAME)32.dll -m32 -Wl,--out-implib,lib$(NAME).a $(NAME).o -L$(LIBDIR32) -lpython37
+	$(CC_MINGW32) -c -DBUILD_DLL -O2 $(NAME).c -I$(IDIR32)
+	$(CC_MINGW32) -shared -o $(NAME)32.dll -Wl,--out-implib,lib$(NAME).a $(NAME).o -L$(LIBDIR32) -lpython37
 
 build_dll_32: $(NAME)32.dll
 
