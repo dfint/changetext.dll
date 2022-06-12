@@ -10,7 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: make build
-      run: |
-        make build_dll_32
-        make build_dll_64
+    - name: make build_dll_32
+      run: make build_dll_32
+
+    - name: make build_dll_64
+      run: make build_dll_64
