@@ -5,10 +5,13 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: install mingw
+      run: sudo apt install mingw-w64
 
     - name: make build_dll_32
       run: make build_dll_32
