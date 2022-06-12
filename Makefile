@@ -2,13 +2,13 @@
 
 # CC=x86_64-w64-mingw32-gcc
 CC=gcc
-IDIR=blob/Python34/include
-LIBDIR=blob/Python34/libs
+IDIR=python/Python37/include
+LIBDIR=python/Python37/libs
 NAME=changetext
 
 $(NAME).dll: $(NAME).c
 	$(CC) -c -DBUILD_DLL -O2 $(NAME).c -I$(IDIR)
-	$(CC) -shared -o $(NAME).dll -Wl,--out-implib,lib$(NAME).a $(NAME).o -L$(LIBDIR) -lpython34
+	$(CC) -shared -o $(NAME).dll -Wl,--out-implib,lib$(NAME).a $(NAME).o -L$(LIBDIR) -lpython37
 
 build: $(NAME).dll
 
