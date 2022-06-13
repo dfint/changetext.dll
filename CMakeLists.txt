@@ -7,4 +7,4 @@ add_library(
     sources/changetext.c
 )
 
-include_directories(/usr/include/python3.8)
+# include_directories(/usr/include/python3.8)
