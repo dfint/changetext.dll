@@ -5,6 +5,7 @@ project(changetext)
 add_library(
     ${PROJECT_NAME} SHARED
     sources/changetext.c
+    sources/changetext.h
 )
 
-# include_directories(/usr/include/python3.8)
+include_directories(/usr/include/python3.8)

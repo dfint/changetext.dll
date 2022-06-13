@@ -17,4 +17,5 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 include_directories("${PROJECT_SOURCE_DIR}/python/Python37-32/include")
-add_dependencies(changetext ${PROJECT_SOURCE_DIR}/python/Python37-32/libs)
+link_directories("${PROJECT_SOURCE_DIR}/python/Python37-32/libs")
+target_link_libraries(changetext libpython37.a)
