@@ -8,4 +8,16 @@ add_library(
     sources/changetext.h
 )
 
-include_directories(/usr/include/python3.8)
+target_include_directories(changetext PRIVATE /usr/include/python3.8)
+
+# add_executable(
+#     test
+#     sources/test.cpp
+# )
+
+# set_property(TARGET test PROPERTY CXX_STANDARD 11)
+
+# target_link_libraries(test
+#     PRIVATE
+#         ${PROJECT_NAME}
+# )
